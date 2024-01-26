@@ -1,0 +1,23 @@
+include $(srctree)/scripts/Kbuild.include
+include $(src)/Makefile
+
+quiet_cmd_dtb_install = INSTALL $@
+cmd_dtb_install = install -D $< $@
+
+dtbos := $(addprefix $(dst)/, $(dtbo-y))
+subdirs := $(addprefix $(obj)/, $(subdir-y))
+
+$(dst)/%.dtbo: FORCE
+	$(Q)rm -f $@
+
+.PHONY: $(subdirs)
+$(subdirs): FORCE
+	$(Q)$(MAKE) -f Makefile.uninstall src=$@ obj=$@ \
+		dst=$(patsubst $(obj)/%,$(dst)/%,$@) all
+
+all: $(subdirs) $(dtbos) FORCE
+
+.PHONY: FORCE
+FORCE:
+
+# vim: filetype=make

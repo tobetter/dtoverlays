@@ -1,0 +1,6 @@
+.gitignore
+
+*.cmd
+*.tmp
+*.swp
+*.dtbo

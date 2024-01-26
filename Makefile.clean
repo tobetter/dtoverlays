@@ -1,0 +1,23 @@
+include $(srctree)/scripts/Kbuild.include
+include $(src)/Makefile
+
+$(obj)/%.dtbo: FORCE
+	$(Q)rm -f $@ $(dtc-tmp) \
+		$(depfile).dtc.tmp \
+		$(depfile).pre.tmp \
+		$(dot-target).cmd \
+		$(dot-target).dts.tmp
+
+dtbos := $(addprefix $(obj)/, $(dtbo-y))
+subdirs := $(addprefix $(obj)/, $(subdir-y))
+
+.PHONY: $(subdirs)
+$(subdirs):
+	$(Q)$(MAKE) -f Makefile.clean src=$@ obj=$@ all
+
+all: $(subdirs) $(dtbos)
+
+.PHONY: FORCE
+FORCE:
+
+# vim: filetype=make

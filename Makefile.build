@@ -1,0 +1,28 @@
+include $(srctree)/scripts/Kbuild.include
+include $(srctree)/scripts/Makefile.lib
+include $(src)/Makefile
+
+DTC_INCLUDE := $(srctree)/include
+DTC_FLAGS += --symbol
+
+if-changed-cond = $(newer-prereqs)$(check-FORCE)
+if_changed_dep = $(if $(if-changed-cond),$(cmd_and_fixdep),@:)
+
+cmd_and_fixdep = \
+	$(cmd); \
+	$(fixdep) $(depfile) $@ '$(make-cmd)' > $(dot-target).cmd; \
+	rm -f $(depfile)
+
+dtbos := $(addprefix $(obj)/, $(dtbo-y))
+subdirs := $(addprefix $(obj)/, $(subdir-y))
+
+.PHONY: $(subdirs)
+$(subdirs):
+	$(Q)$(MAKE) -f Makefile.build src=$@ obj=$@ all
+
+all: $(subdirs) $(dtbos)
+
+.PHONY: FORCE
+FORCE:
+
+# vim: filetype=make
