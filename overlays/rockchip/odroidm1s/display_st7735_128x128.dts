@@ -1,0 +1,8 @@
+/dts-v1/;
+/plugin/;
+
+#include "display_tinydrm.dtsi"
+
+&tinydrm {
+	compatible = "jianda,jd-t18003-t01";
+};
