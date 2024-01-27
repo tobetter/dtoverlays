@@ -1,0 +1,7 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+
+Files: *
+Copyright:
+ 2024 Dongjin Kim <tobetter@gmail.com>
+License: GPL-2
+ See /usr/share/common-licenses/GPL for the full text of the GPL.

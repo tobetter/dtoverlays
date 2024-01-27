@@ -1,0 +1,6 @@
+#!/bin/sh
+
+KVERS=${1}
+
+make -C /usr/src/dt-overlays install \
+	KERNELRELEASE=${KVERS:-$(uname -r)}

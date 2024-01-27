@@ -1,0 +1,4 @@
+Makefile*			/usr/src/dt-overlays
+overlays			/usr/src/dt-overlays/
+etc/initramfs/post-update.d/
+usr/sbin/
